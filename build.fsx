@@ -1,84 +1,74 @@
-#r "packages/FAKE/tools/FakeLib.dll" // include Fake lib
-open Fake
-open Fake.AssemblyInfoFile
+﻿#r "paket:
+nuget Fake.IO.FileSystem
+nuget Fake.DotNet.AssemblyInfoFile
+nuget Fake.DotNet.Cli
+nuget Fake.DotNet.Testing.NUnit
+nuget Fake.DotNet.Paket
+nuget Fake.Core.Target
+nuget Fake.Core.ReleaseNotes //"
+#load "./.fake/build.fsx/intellisense.fsx"
 
-open System
-open System.IO
+open Fake.DotNet
+open Fake.DotNet.Testing
+open Fake.Core
+open Fake.Core.TargetOperators
+open Fake.IO
+open Fake.IO.Globbing.Operators
+open Fake.IO.FileSystemOperators
 
-Environment.CurrentDirectory <- __SOURCE_DIRECTORY__
+System.Environment.CurrentDirectory <- __SOURCE_DIRECTORY__
 
 let project = "HostBox.Borderline"
-let authors = ["SDVentures Team"]
+let authors = [ "SDVentures Team" ]
 let summary = "A library declares the plugin interface to load into HostBox."
 let description = """
-  The package contains plugin interfaces."""
+    The package contains plugin interfaces."""
 let license = "MIT License"
 let tags = "hostbox plugin host"
 
-let release = ReleaseNotesHelper.parseReleaseNotes (File.ReadLines "RELEASE_NOTES.md")
+let release = ReleaseNotes.parse (System.IO.File.ReadLines "RELEASE_NOTES.md")
 
-let buildDir = @"build\"
-let nugetDir = @"nuget\"
+let tempDir = "temp"
 
-let projects =
-    !! "Sources/**/*.csproj"
+let solution = "HostBox.Borderline.sln"
 
-let isAppVeyorBuild = environVar "APPVEYOR" <> null
-let appVeyorBuildNumber = environVar "APPVEYOR_BUILD_NUMBER"
-let appVeyorRepoCommit = environVar "APPVEYOR_REPO_COMMIT"
-
-
-Target "CleanUp" (fun _ ->
-    CleanDirs [ buildDir ]
+Target.create "CleanUp" (fun _ ->
+    Shell.cleanDirs [ tempDir ]
 )
 
-Target "BuildVersion" (fun _ ->
-    let buildVersion = sprintf "%s-build%s" release.NugetVersion appVeyorBuildNumber
-    Shell.Exec("appveyor", sprintf "UpdateBuild -Version \"%s\"" buildVersion) |> ignore
+Target.create "AssemblyInfo" (fun _ ->
+    if not BuildServer.isLocalBuild then
+        let info =
+            [ AssemblyInfo.Title project
+              AssemblyInfo.Company (authors |> String.concat ",")
+              AssemblyInfo.Product project
+              AssemblyInfo.Description summary
+              AssemblyInfo.Version release.AssemblyVersion
+              AssemblyInfo.FileVersion release.AssemblyVersion
+              AssemblyInfo.InformationalVersion release.NugetVersion
+              AssemblyInfo.Copyright license ]
+        AssemblyInfoFile.createCSharp <| "./Sources/" @@ project @@ "/Properties/AssemblyInfo.cs" <| info
 )
 
-Target "AssemblyInfo" (fun _ ->
-    printfn "%A" release
-    let info =
-        [ Attribute.Title project
-          Attribute.Product project
-          Attribute.Description summary
-          Attribute.Version release.AssemblyVersion
-          Attribute.FileVersion release.AssemblyVersion
-          Attribute.InformationalVersion release.NugetVersion
-          Attribute.Copyright license ]
-    CreateCSharpAssemblyInfo <| "./Sources/" @@ project @@ "/Properties/AssemblyInfo.cs" <| info
+Target.create "Build" (fun _ ->
+    solution |> DotNet.build (fun p -> { p with Configuration = DotNet.BuildConfiguration.Release })
 )
 
-Target "Build" (fun () ->
-    MSBuildRelease buildDir "Build" projects |> Log "Build Target Output: "
+Target.create "BuildPacket" (fun _ ->
+    Paket.pack (fun p ->
+                   { p with
+                       Version = release.NugetVersion
+                       BuildConfig = "Release"
+                       ReleaseNotes = (release.Notes |> String.concat "\n")
+                       Symbols = true })
 )
 
-Target "Deploy" (fun () ->
-    NuGet (fun p ->
-        { p with
-            Authors = authors
-            Project = project
-            Summary = summary
-            Description = description
-            Version = release.NugetVersion
-            ReleaseNotes = toLines release.Notes
-            Tags = tags
-            OutputPath = buildDir
-            ToolPath = "./packages/NuGet.CommandLine/tools/Nuget.exe"
-            AccessKey = getBuildParamOrDefault "nugetkey" ""
-            Publish = hasBuildParam "nugetkey"
-            Dependencies =
-                [ ]
-            Files =
-                [ (@"..\" +  buildDir + "HostBox.Borderline.dll", Some "lib/net452", None) ]})
-        <| (nugetDir + project + ".nuspec")
-)
+Target.create "Default" ignore
 
 "CleanUp"
-    =?> ("BuildVersion", isAppVeyorBuild)
     ==> "AssemblyInfo"
     ==> "Build"
-    ==> "Deploy"
+    ==> "BuildPacket"
+    ==> "Default"
 
-RunTargetOrDefault "Deploy"
+Target.runOrDefault "Default"

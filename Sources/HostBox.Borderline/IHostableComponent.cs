@@ -1,8 +1,7 @@
 ﻿namespace HostBox.Borderline
 {
     /// <summary>
-    /// Компонент приложения <c>AppHoster</c>.
-    /// Компонент должен уметь работать как <c>Windows</c> служба.
+    /// Запускаемый компонент.
     /// </summary>
     public interface IHostableComponent
     {

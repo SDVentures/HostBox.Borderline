@@ -1,4 +1,3 @@
-source https://nuget.org//api/v2
+source https://api.nuget.org/v3/index.json
 
-nuget FAKE 4.0.3 framework: net452
-nuget NuGet.CommandLine 2.8.6 framework: net452
+nuget FAKE 5.0.0

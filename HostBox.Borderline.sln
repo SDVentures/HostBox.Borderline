@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sources", "Sources", "{5CF5D3F7-214E-4630-BB37-A8FC92988B45}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HostBox.Borderline", "Sources\HostBox.Borderline\HostBox.Borderline.csproj", "{74838237-4BD8-41EF-A94D-B09330AC5924}"
+# Visual Studio 15
+VisualStudioVersion = 15.0.27703.2035
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HostBox.Borderline", "Sources\HostBox.Borderline\HostBox.Borderline.csproj", "{D447AEF7-9462-4BC8-BEF4-BE443A39B2CB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{74838237-4BD8-41EF-A94D-B09330AC5924}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{74838237-4BD8-41EF-A94D-B09330AC5924}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{74838237-4BD8-41EF-A94D-B09330AC5924}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{74838237-4BD8-41EF-A94D-B09330AC5924}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D447AEF7-9462-4BC8-BEF4-BE443A39B2CB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D447AEF7-9462-4BC8-BEF4-BE443A39B2CB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D447AEF7-9462-4BC8-BEF4-BE443A39B2CB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D447AEF7-9462-4BC8-BEF4-BE443A39B2CB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{74838237-4BD8-41EF-A94D-B09330AC5924} = {5CF5D3F7-214E-4630-BB37-A8FC92988B45}
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A3DCC204-E535-47B0-BA69-945539B6D6A1}
 	EndGlobalSection
 EndGlobal
