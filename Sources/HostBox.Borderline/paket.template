@@ -1,6 +1,0 @@
-﻿type project
-owners Social Discovery Ventures
-copyright Copyright @ Social Discovery Ventures 2018
-tags hostbox plugin host
-summary A library declares the plugin interface to load into HostBox.
-description The package contains plugin interfaces.

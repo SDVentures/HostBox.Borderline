@@ -1,14 +1,18 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
-        <GenerateAssemblyCompanyAttribute>false</GenerateAssemblyCompanyAttribute>
-        <GenerateAssemblyFileVersionAttribute>false</GenerateAssemblyFileVersionAttribute>
-        <GenerateAssemblyInformationalVersionAttribute>false</GenerateAssemblyInformationalVersionAttribute>
-        <GenerateAssemblyVersionAttribute>false</GenerateAssemblyVersionAttribute>
-        <GenerateAssemblyProductAttribute>false</GenerateAssemblyProductAttribute>
-        <GenerateAssemblyTitleAttribute>false</GenerateAssemblyTitleAttribute>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Authors>SDVentures Team</Authors>
+        <Copyright>Copyright @ Social Discovery Ventures 2018</Copyright>
+        <Description>A library declares the plugin interface to load into HostBox.</Description>
+        <Company>Social Discovery Ventures</Company>
+        <PackageTags>tags hostbox plugin host</PackageTags>
+        <Version>2.0.0-core4</Version>
+        <PackageReleaseNotes>Added a method to IAssemblyLoader returning default assembly.</PackageReleaseNotes>
     </PropertyGroup>
-    
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+        <DocumentationFile>bin\Debug\netstandard2.0\HostBox.Borderline.xml</DocumentationFile>
+    </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
         <DocumentationFile>bin\Release\netstandard2.0\HostBox.Borderline.xml</DocumentationFile>
     </PropertyGroup>

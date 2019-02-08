@@ -4,10 +4,11 @@
 bin
 obj
 paket-files/
-Sources/HostBox.Borderline/**/AssemblyInfo.cs
+Sources/**/AssemblyInfo.cs
 packages/*
 temp/*
 *.sln.DotSettings.user
 *.userprefs
 *.bak
 .paket/paket.exe
+build/
