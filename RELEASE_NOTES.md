@@ -1,4 +1,4 @@
-﻿## 2.0.0-core5
+﻿## 2.0.0-core6
   Extends IConfiguration interface by GetSection method.
 
 ## 2.0.0-core4

@@ -47,7 +47,7 @@ namespace HostBox.Borderline
         /// </summary>
         /// <param name="path">Path of a subsection to return.</param>
         /// <returns>The <see cref="IConfiguration" />.</returns>
-        IEnumerable<IConfiguration> GetSection(string path);
+        IConfiguration GetSection(string path);
 
         /// <summary>
         /// Registers configuration reload callback.
