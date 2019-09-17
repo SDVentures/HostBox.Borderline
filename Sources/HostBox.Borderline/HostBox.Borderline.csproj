@@ -3,12 +3,12 @@
         <TargetFramework>netstandard2.0</TargetFramework>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Authors>SDVentures Team</Authors>
-        <Copyright>Copyright @ Social Discovery Ventures 2018</Copyright>
+        <Copyright>Copyright @ Social Discovery Ventures 2019</Copyright>
         <Description>A library declares the plugin interface to load into HostBox.</Description>
         <Company>Social Discovery Ventures</Company>
         <PackageTags>tags hostbox plugin host</PackageTags>
-        <Version>2.0.0-core4</Version>
-        <PackageReleaseNotes>Added a method to IAssemblyLoader returning default assembly.</PackageReleaseNotes>
+        <Version>2.0.0-core5</Version>
+        <PackageReleaseNotes>Extends IConfiguration interface by GetSection method.</PackageReleaseNotes>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
         <DocumentationFile>bin\Debug\netstandard2.0\HostBox.Borderline.xml</DocumentationFile>

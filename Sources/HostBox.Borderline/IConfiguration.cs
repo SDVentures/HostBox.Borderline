@@ -43,6 +43,13 @@ namespace HostBox.Borderline
         IEnumerable<IConfiguration> GetChildren();
 
         /// <summary>
+        /// Returns configuration subsection by specified path.
+        /// </summary>
+        /// <param name="path">Path of a subsection to return.</param>
+        /// <returns>The <see cref="IConfiguration" />.</returns>
+        IEnumerable<IConfiguration> GetSection(string path);
+
+        /// <summary>
         /// Registers configuration reload callback.
         /// </summary>
         /// <param name="callback">Callback to register.</param>
