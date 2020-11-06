@@ -1,27 +1,27 @@
 ﻿namespace HostBox.Borderline
 {
     /// <summary>
-    /// Запускаемый компонент.
+    /// Hostable component interface.
     /// </summary>
     public interface IHostableComponent
     {
         /// <summary>
-        /// Запустить компонент.
+        /// Starts component.
         /// </summary>
         void Start();
 
         /// <summary>
-        /// Остановить компонент.
+        /// Stops component.
         /// </summary>
         void Stop();
 
         /// <summary>
-        /// Приостановить компонент.
+        /// Pauses component.
         /// </summary>
         void Pause();
 
         /// <summary>
-        /// Возобновить работу компонента.
+        /// Resumes component.
         /// </summary>
         void Resume();
     }

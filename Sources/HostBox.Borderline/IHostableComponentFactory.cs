@@ -6,9 +6,11 @@
     public interface IHostableComponentFactory
     {
         /// <summary>
-        /// Создает экземпляр компонента.
+        /// Component instance.
         /// </summary>
-        /// <returns>Экземпляр компонента.</returns>
-        IHostableComponent CreateComponent();
+        /// <param name="loader">Component assembly loader.</param>
+        /// <param name="config">Component configuration.</param>
+        /// <returns>Component instance.</returns>
+        IHostableComponent CreateComponent(IAssemblyLoader loader, IConfiguration config = null);
     }
 }
