@@ -1,4 +1,7 @@
-﻿namespace HostBox.Borderline
+﻿using System.Threading;
+using System.Threading.Tasks;
+
+namespace HostBox.Borderline
 {
     /// <summary>
     /// Hostable component interface.
@@ -8,21 +11,11 @@
         /// <summary>
         /// Starts component.
         /// </summary>
-        void Start();
+        Task Start(CancellationToken cancellationToken);
 
         /// <summary>
         /// Stops component.
         /// </summary>
-        void Stop();
-
-        /// <summary>
-        /// Pauses component.
-        /// </summary>
-        void Pause();
-
-        /// <summary>
-        /// Resumes component.
-        /// </summary>
-        void Resume();
+        Task Stop(CancellationToken cancellationToken);
     }
 }
